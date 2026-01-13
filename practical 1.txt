@@ -1,0 +1,10 @@
+1 create user a2 identified by sit;
+(user creation with password sit)
+2 grant connect, resource to a2;
+(permissions for a2)
+3 alter user a2 identified by mohit121105;
+(to change password for a2)
+4 exit
+(to save the data or save and exit)
+5 alter user a2 account unlock;
+(login as system, then unlock user)
