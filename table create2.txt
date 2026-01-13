@@ -1,0 +1,12 @@
+1 create table p_info (id int, name varchar2(50), contact int, desg varchar2(10));
+output Table created.
+2 select * from tab;
+output TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+P_INFO                         TABLE
+
+3 select * from p_info;
+output no rows selected
+4 insert into p_info values (101, xyz, 12345678, student);
+output ERROR at line 1:
+ORA-00984: column not allowed here
