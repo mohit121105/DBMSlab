@@ -1,0 +1,65 @@
+1. create a table st_info with PRN, ST_NAME, M1, M2, M3
+code: CREATE TABLE st_info (
+  2      PRN     NUMBER,
+  3      ST_NAME VARCHAR2(20),
+  4      M1      INTEGER,
+  5      M2      INTEGER,
+  6      M3      INTEGER
+  7  );
+
+Table created.
+
+1.1 modify prn and m1, m2 ,m3
+code alter table st_info modify PRN int;
+code alter table st_info modify(M1 NUMBER, M2 NUMBER, M3 NUMBER);
+
+2. insert at least 7 rows
+code insert into st_info values (101, 'raj', 23,45,67);
+2.1 code: select * from st_info;
+output:  select * from st_info;
+
+       PRN ST_NAME                      M1         M2         M3
+---------- -------------------- ---------- ---------- ----------
+       101 raj                          23         45         67
+it will display the row
+3. code alter table st_info add (total number, perc number);
+   code insert into st_info (PRN, ST_NAME, M1, M2, M3) values (102, 'raju', 23,45,67);
+
+4. calculate perc and number
+ code update st_info set total = M1 + M2 + M3;
+ code update st_info set perc = total/3;
+
+5 create a table with emp_id , name and basic
+CREATE TABLE emp_info (emp_id NUMBER PRIMARY KEY, name VARCHAR2(20), basic NUMBER);
+ALTER TABLE emp_info MODIFY (emp_id NUMBER(10), name VARCHAR2(30), basic NUMBER);
+5.1 insert at least 10 rows
+INSERT INTO emp_info VALUES (1, 'employee1', 20000);
+COMMIT;
+5.2 add hra, da, total
+ALTER TABLE emp_info ADD (hra NUMBER);
+ALTER TABLE emp_info ADD (da NUMBER);
+ALTER TABLE emp_info ADD (total NUMBER);
+COMMIT;
+5.3 compute hra as 7.5% of basic
+update emp_info set hra = 0.075 * basic;
+COMMIT;
+5.4 compute da as 150% of basic
+UPDATE emp_info SET da = basic * 1.5;
+COMMIT;
+5.5 compute total
+UPDATE emp_info SET total = basic + hra + da;
+COMMIT;
+
+5.6 add dedu, take_home
+ALTER TABLE emp_info ADD (dedu NUMBER);
+ALTER TABLE emp_info ADD (take_home NUMBER);
+5.7 compute dedu as 12% of total
+UPDATE emp_info SET dedu = total * 0.12;
+COMMIT;
+
+5.8 compute take_home as difference between dedu and total
+UPDATE emp_info SET take_home = total - dedu;
+COMMIT;
+
+check final
+select * from emp_info;
