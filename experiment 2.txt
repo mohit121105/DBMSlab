@@ -1,0 +1,69 @@
+instructor
+
+CREATE TABLE INSTRUCTOR (
+  2  instructor_id NUMBER PRIMARY KEY,
+  3  name VARCHAR2(50) NOT NULL,
+  4  dept_id NUMBER,
+  5  is_hod CHAR(1) DEFAULT 'N' CHECK (is_hod IN ('Y','N')),
+  6  salary NUMBER(10,2),
+  7  CONSTRAINT fk_instructor_dept
+  8     FOREIGN KEY (dept_id)
+  9     REFERENCES DEPARTMENT(dept_id)
+ 10  );
+INSERT INTO INSTRUCTOR (instructor_id, name, dept_id, is_hod, salary) VALUES (1,'John Doe',1,'Y',80000);
+
+CREATE TABLE COURSE (
+course_id VARCHAR(8) PRIMARY KEY,
+title VARCHAR(100) NOT NULL,
+dept_id INT,
+credits INT,
+FOREIGN KEY (dept_id) REFERENCES DEPARTMENT(dept_id)
+);
+INSERT INTO COURSE(course_id, title, dept_id, credits) VALUES ('CS-101','Introduction to Programming',1,3);
+
+CREATE TABLE SECTION (
+section_id INT PRIMARY KEY,
+course_id VARCHAR(8),
+sec_id INT,
+semester VARCHAR(6),
+year INT,
+building VARCHAR(50),
+room_number VARCHAR(10),
+time_slot_id VARCHAR(4),
+FOREIGN KEY (course_id) REFERENCES COURSE(course_id)
+);
+INSERT INTO SECTION (section_id, course_id, sec_id, semester, year, building, room_number, time_slot_id) VALUES (1, 'CS-101',1,'Fall', 2023, 'Taylor','3128','A');
+
+CREATE TABLE TEACHES (
+instructor_id INT,
+section_id INT,
+PRIMARY KEY (instructor_id, section_id),
+FOREIGN KEY (instructor_id) REFERENCES INSTRUCTOR(instructor_id),
+FOREIGN KEY (section_id) REFERENCES SECTION(section_id)
+);
+INSERT INTO TEACHES(instructor_id, section_id) VALUES  (1,1);
+INSERT INTO TEACHES(instructor_id, section_id) VALUES  (2,2);
+
+CREATE TABLE STUDENT (
+student_id INT PRIMARY KEY,
+name VARCHAR(50) NOT NULL,
+tot_cred INT
+);
+INSERT INTO STUDENT (student_id, name, tot_cred) VALUES (1,'Mike Johnson',60);
+INSERT INTO STUDENT (student_id, name, tot_cred) VALUES (2,'Sarah Lee',45);
+INSERT INTO STUDENT (student_id, name, tot_cred) VALUES (3,'Tom Brown',30);
+INSERT INTO STUDENT (student_id, name, tot_cred) VALUES (4,'Emily Davis',75);
+
+CREATE TABLE TAKES (
+student_id INT,
+section_id INT,
+grade VARCHAR(2),
+PRIMARY KEY (student_id, section_id),
+FOREIGN KEY (student_id) REFERENCES STUDENT (student_id),
+FOREIGN KEY (section_id) REFERENCES SECTION (section_id)
+);
+
+INSERT INTO TAKES (student_id, section_id, grade) VALUES (1,1,'A');
+
+        
+                   
