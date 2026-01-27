@@ -1,0 +1,23 @@
+3.rename building of table department
+ALTER TABLE department modify building varchar2(50) NOT NULL;
+alter table department add city varchar2(20);
+desc department;
+4. increase the salary of each instructor in the comp sci department by 10%
+select * from department;  // to se department id of cse 
+set linesize 200;
+select * from instructor; // increase salary of the particular dept id instructor
+update instructor set salary = salary + salary * .1 // press enter
+where dept_id = (select dept_id from department where name = 'Computer Science'); // do same for mathematics
+5. Give 5% salary rise to those instructor earning less than 80000
+update instructor set salary = salary + salary * .05 where salary  < 80000;
+6. Create a new course with course id cs 001 with credit 1
+desc course;
+select * from course; // to check if it is already present
+
+insert into course (course_id, title, dept_id, credits) values ('CS-001', 'Weekly Seminar', 1, 1);
+select * from course; // add subject named PBL with 3 credit in cs
+insert into course (course_id, title, dept_id, credits) values ('CS-002', 'PBL', 1, 3);
+6.1 create a section of the course cs001 in fall 2017 with sec_id of 8, and with the location of this section 
+insert into section (sec_id, year, semester, course_id, 
+
+
