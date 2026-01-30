@@ -1,0 +1,18 @@
+to find the last no of tuple or highest primary key value in the table:
+=> select max(dept_id) from department; # select max(PK_value) from tablename
+
+to create sequence we will take employee table 
+create sequence emp_sq start with 1 increment by 1;
+create table emp (emp_id int primary key, name varchar2(10));
+insert into emp (emp_id, name) values (emp_sq.nextval, '1'); // create 10 like this
+drop sequence emp_sq;
+to add new column PINCODE to the table (emp)
+alter table emp add pincode int not null; # we cant add the pincode with constraint with not null because data already there in table so either we have to remove the data or remove the constrain in the new field pincode
+to delete the data 
+truncate table tablename;
+
+insert into emp values (emp_sq.nextval, 'name', 22332233);
+to change the field name :
+alter table emp rename column name to emp_name; // to change field name
+to rename the table
+rename emp to employee;
