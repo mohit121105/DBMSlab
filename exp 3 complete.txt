@@ -1,0 +1,36 @@
+to find the instructors of comp sci. :
+select * from instructor where dept_id = (select dept_id from department where name = 'Computer Science');
+select avg(salary) as avg_salary from instructor where dept_id=(select dept_id from department where name = 'Computer Science'); // for average
+using joins
+select avg(i.salary) as avg_salary from instructor i join department d on i.dept_id = d.dept_id where d.name = 'Computer Science';
+
+to find average salary in each department
+select d.name as d_name, avg(i.salary) from department d join instructor i on d.dept_id = i.dept_id group by d.name;
+what is the total salary of all teacher earning more than 30k
+select sum(salary) as total_salary from instructor where salary > 30000;
+4 
+select C.course_id, C.title, COUNT(E.student_id) AS enrolled_students FROM COURSE C LEFT JOIN SECTION S ON C.course_id=S.course_id LEFT JOIN ENROLLMENT E ON S.section_id = E.section_id GROUP BY C.course_id, C.title ORDER BY C.course_id;
+
+find the  buildings
+select * from department where  building like '%ton%'; // depart ment contain building names like newton Watson curie etc
+select * from department where  building like '%son%';
+select * from department where lower(name) like '%sci%'; // for department name
+retrieve total no of instructor
+select name from instructor where hiredate>add_months(sysdate, -60);
+display the listof instructor who have joined befoe 1 jan 2021 or after 31 jun 2021
+
+select name from instructor where hiredate>= date '01-jan-2021' and hiredate<= date '30-jun-2021'; 
+
+display those instructor retiring in 01  jan 2024 if maximum job is 3 years
+
+display instructor whose salary digit > 4
+select name,salary from instructor where length(salary)>=4;
+
+print a list of instructors displaying 'Less Salary' if less than 60000 if exactly 60000 display as 'Exact Salary' and if greater than60k display 'More Salary'
+Select name,
+ case
+ when salary < 60000 then 'Less Salary'
+ when salary = 60000 then 'Exact Salary'
+ else 'More Salary'
+ end as Salary_category
+ from instructor; 
