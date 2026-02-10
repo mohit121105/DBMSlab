@@ -1,0 +1,21 @@
+1.
+SELECT I.NAME || '-' || D.NAME AS NAME_VS_DPT FROM INSTRUCTOR I JOIN DEPARTMENT D ON I.DEPT_ID=D.DEPT_ID;  // JOING ISNTRUCTOR AND DEPARTMENT 
+2 RETRIEVE DISTINCTNUMBER OF INSTRUCTOR FROM EACH DEPARTMENT
+select count(distinct i.name) as total_names_per_dept from instructor i join department d on i.dept_id = d.dept_id group by d.name;
+
+3. FIND THE NAMES OF THE INSTRUCTORS EARNING MORE THAN BIOLOFY INSTRUCTOR
+SELECT i.name,d.name,i.salary FROM instructor i JOIN department d ON i.dept_id=d.dept_id WHERE i.salary>ANY(SELECT i2.salary FROM instructor i2 JOIN department d2 ON i2.dept_id=d2.dept_id WHERE d2.name='Biology');
+
+
+3 Display all emp name that starts with a;
+select first_name from emp where first_name like ('A%') and length(First_name)>=3;
+4. departs loc dallas Texas etc
+SELECT dept_name,location FROM  departments where location IN ('New York','Dallas','Chicago');
+5. Display the names of employees earning >= 3000
+select first_name, last_name, job, salary from emp where (lower(job) = 'clerk' or lower(job) = 'salesman' or lower(job) = 'analyst') and salary >= 3000;
+6. Display emp not manager
+select first_name, last_name, job, salary from emp where lower(job) != 'manager';
+7 Display emp who earns highest salary
+select first_name, last_name, job, salary from emp where salary = (select max(salary) from emp);
+8 highest salary among clerk
+SELECT emp_no, first_name, last_name, salary FROM emp WHERE job='CLERK' AND salary=(SELECT MAX(salary) FROM emp WHERE job='CLERK');
