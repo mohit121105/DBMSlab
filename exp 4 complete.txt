@@ -1,0 +1,28 @@
+1 display all employees name start with 'a' and are at least 3 char in length
+
+select first_name form emp where first_name like 'a%' and length(first_name) >= 3;
+
+2 display departments having Dallas, New York and Chicago locations
+
+select DEPT_NAME from departments where lower(location) like 'da%' or lower(location) like 'ne%' or lower(location) like 'ch%' 
+
+3 display employees who are clerk , salesman , analyst earning more than 3000
+  
+select FIRST_NAME, job, salary from emp where (lower(job) = 'clerk' or lower(job) = 'clerk' or lower(job) = 'salesman' or lower(job) = 'analyst') and salary > 3000;
+
+4 display the name of emloyees who are not working as managers
+select FIRST_NAME, job from emp where (lower(job) != 'manager');
+
+5 Display name of employee who earn max salary
+
+select first_name, salary from emp where salary = (select max(salary) from emp);
+6 Display th eclerk who earn highest salary
+
+7 Display clerks earning less than james and earning more than that of bob
+SELECT emp_no, first_name, job, salary FROM emp WHERE LOWER(job)='clerk' AND salary > (SELECT salary FROM emp WHERE LOWER(first_name)='bob') AND salary < (SELECT salary FROM emp WHERE LOWER(first_name)='james');
+
+8 Display the names of employees who earn highest salary in their respective departments.
+SELECT e.first_name, e.salary, d.dept_name from emp e join departments d on e.deptno = d.deptno where e.salary = (select max(salary) from emp where deptno = e.deptno);
+
+9 Display those employees who are working in the same dept where his manager is working.
+select e.first_name from emp e join emp m on e.manager_id = m.emp_no where e.deptno=m.deptno;
