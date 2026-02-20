@@ -1,0 +1,18 @@
+create procedure hello_world
+as
+begin
+dbms_output.put_line('welcome to SIT');
+end;
+/
+
+create procedure add1
+as
+(a number,
+ b number)
+begin
+ a := 5;
+ b := 10;
+
+dbms_output.put_line('Result:' ||(a+b));
+end;
+/
