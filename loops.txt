@@ -1,0 +1,108 @@
+1 st loop
+create or replace procedure loop2
+as
+a number;
+begin
+a := 3;
+while a < 5 loop
+dbms_output.put_line('true');
+a := a + 1;
+end loop;
+end;
+/
+
+execution exec loop2;
+
+create or replace procedure evennumber
+as
+a number;
+begin
+a := 0;
+while a < 20 loop
+dbms_output.put_line(a);
+a := a + 2;
+end loop;
+end;
+/
+
+create or replace procedure summation1
+as
+a number;
+i number;
+begin
+a := 0;
+i := 0;
+while i < 10 loop
+dbms_output.put_line(a);
+i := i + 1;
+a := a + i;
+end loop;
+end;
+/
+
+create or replace procedure summationn (
+    n in number,
+    a out number
+)
+as
+    i number;
+begin
+    i := 0;
+    a := 0;
+
+    while i < n loop
+        i := i + 1;
+        a := a + i;
+    end loop;
+
+    dbms_output.put_line(a);
+end;
+/
+
+create or replace procedure evennumberf
+as
+a number;
+begin
+a := 0;
+for a in 0..10 loop
+dbms_output.put_line(a * 2);
+end loop;
+end;
+/
+
+CREATE OR REPLACE PROCEDURE summation1
+AS
+    a NUMBER := 0;
+BEGIN
+    FOR i IN 0..9 LOOP
+        DBMS_OUTPUT.PUT_LINE(a);
+        a := a + (i + 1);
+    END LOOP;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE loop2
+AS
+BEGIN
+    FOR a IN 3..4 LOOP
+        DBMS_OUTPUT.PUT_LINE('true');
+    END LOOP;
+END;
+/
+
+
+CREATE OR REPLACE PROCEDURE summationn (
+    n IN NUMBER,
+    a OUT NUMBER
+)
+AS
+BEGIN
+    a := 0;
+
+    FOR i IN 1..n LOOP
+        a := a + i;
+    END LOOP;
+
+    DBMS_OUTPUT.PUT_LINE(a);
+END;
+/

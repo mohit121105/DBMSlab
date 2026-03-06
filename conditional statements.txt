@@ -1,0 +1,23 @@
+create or replace procedure conditionmarks
+as
+cs number := 45;
+os number := 50;
+dbms number := 75;
+m3 := 95;
+begin
+if cs >= 50 and os >= 50 and dbms >= 50 and m3 >= 50 then
+dbms_output.put_line('Pass');
+dbms_output.put_line(cs + os+ dbms+ m3);
+else
+dbms_output.put_line('fail');
+end if;
+if cs + os+ dbms+ m3 >= 90 then
+dbms_output.put_line('A grade');
+
+else if cs + os+ dbms+ m3 >= 80 and cs + os+ dbms+ m3 < 90 then
+dbms_output.put_line('B grade');
+else
+dbms_output.put_line('Average');
+end if;
+end;
+/
