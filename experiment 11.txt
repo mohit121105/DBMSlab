@@ -1,0 +1,15 @@
+create or replace function square1 (n in number) return number
+as
+sq number := 0;
+begin
+	sq := n*n;
+return sq;
+end;
+/
+
+execution :
+
+variable n number;
+select square1(10) from dual;
+
+q2 create same for finding result whether pass or fail

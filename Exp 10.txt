@@ -1,0 +1,34 @@
+create or replace procedure excp1 (n in number)
+as
+Vname Employees.Emp_name%type;
+Vsalary Employees.Salary%Type;
+Begin
+	select emp_name, salary into vname, vsalary from employees where emp_id=n;
+	DBMS_output.put_line('Emp Name = ' || vname);
+	DBMS_output.put_line('Emp Salary = ' || vsalary);
+Exception
+	when No_Data_found then
+		DBMS_output.put_line('Emp id not found');
+end;
+/
+
+create or replace procedure invalidm
+ (m1 in number,
+  m2 in number,
+  m3 in number)
+as
+Invalid_marks exception;
+begin
+if m1 < 0 or m1 > 100 or m2 < 0 or m2 > 100 or m3 < 0 or m3 > 100 then
+	raise Invalid_marks; 
+elsif m1 > 50 and m2 > 50 and m3 > 50 then
+	DBMS_output.put_line('Result : Pass');
+else
+	DBMS_output.put_line('Result : Fail');
+end if;
+Exception
+	when Invalid_marks then
+		DBMS_output.put_line('Invalid marks');
+end;
+/
+	
