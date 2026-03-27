@@ -1,0 +1,36 @@
+Trigger Syntax:
+create or replace trigger trigger_name
+	before || after for each
+	insert || update || delete on Table_name
+begin
+	code
+end;
+/
+
+ create or replace trigger st_tri
+   before update on st_info
+   Begin
+    dbms_output.put_line('Statement level trigger fired');
+   end;
+    /
+
+execution:- update st_info set sub1 = sub1 - 10;
+
+ create or replace trigger row_tri
+   before update on st_info for each row
+   Begin
+    dbms_output.put_line('Statement level trigger fired');
+   end;
+    /
+
+execution :- update st_info set total = sub1 + sub2 + sub3 where sub1>75;
+to see result :- select * from st_info;
+
+ create or replace trigger try_validmarks
+   before insert on st_info for each row
+   Begin
+	if (sub1< 0 or sub1 > 100) or (sub2< 0 or sub2 > 100) or (sub3 < 0 or sub3 > 100) or (sub4< 0 or sub4 > 100) then
+    		dbms_output.put_line('Enter valid marks for all subjects in range between 0 to 100');
+	end if;
+   end;
+    /
