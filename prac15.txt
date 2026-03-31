@@ -1,0 +1,15 @@
+create or replace procedure to_mnth
+as
+v_month varvchr2(10);
+begin
+v_month := upper(to_char(sysdate, 'dy'));  // display in upper case
+dbms_output.put_line('the current day is ' || v_month);
+end;
+/
+
+write a trigger to prevent insertion or updatation on emp2 on sat or sun using today's day i.e 
+
+create or replace trigger prevent1
+
+
+

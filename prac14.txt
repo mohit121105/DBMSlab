@@ -1,0 +1,66 @@
+create table emp2 with fields empno as int, name as char, category as int and write a trigger for insert or update on emp2 for new record in uppercase
+only
+using command like name= upper(name)
+
+create table emp2 (
+	empno int;
+	name varchar2(10);
+	category int);
+
+create or replace trigger emp2_undercase2
+before insert or update on emp2
+for each row
+begin
+:new.name := upper(:new.name);
+end;
+/
+
+working:
+
+insert into emp2 values(1,'mohit',1);
+select * from emp2;
+
+output:- name will be in upper case
+adding more fields
+insert into emp2 values(2,'rohit',1);
+insert into emp2 values(3,'ab',2);
+insert into emp2 values(4,'cd',2);
+insert into emp2 values(5,'ef',3);
+insert into emp2 values(6,'gh',3);
+
+adding one more field salary to the table:
+
+alter table emp2
+add salary number;
+
+trigger for salary updation:
+
+create or replace trigger salaryupdate
+before insert or update on emp2
+for each row
+begin
+if :new.salary < 10000 and :new.category = 1 then
+	dbms_output.put_line('Salary should be more than 10000');
+elsif :new.salary < 20000 and :new.category = 2 then
+	dbms_output.put_line('Salary should be more than 20000');
+elsif :new.salary < 30000 and :new.category = 3 then
+	dbms_output.put_line('Salary should be more than 30000');
+end if;
+end;
+/
+
+working :- it wont prevent inserting or updating , it will just display message
+for preventing:
+create or replace trigger salaryupdate
+before insert or update on emp2
+for each row
+begin
+if :new.salary < 10000 and :new.category = 1 then
+	raise_application_error(-20001,'Salary should be more than 10000');
+elsif :new.salary < 20000 and :new.category = 2 then
+	raise_application_error(-20002,'Salary should be more than 20000');
+elsif :new.salary < 30000 and :new.category = 3 then
+	raise_application_error(-20003,'Salary should be more than 30000');
+end if;
+end;
+/
