@@ -12,4 +12,41 @@ write a trigger to prevent insertion or updatation on emp2 on sat or sun using t
 create or replace trigger prevent1
 
 
+create or replace trigger min_max_sal  //mutation error
+before insert or update on emp2
+for each row
+declare
+min_sal number;
+max_sal number;
+low_sal number;
+upp_sal number; 
+begin
+	select min(salary), max(salary) into min_sal,max_sal from emp2;
+	low_sal := (max_sal)/ 10;
+	upp_sal := (min_sal)*10;
+	if :new.salary < low_sal and :new.salary > upp_sal then
+		raise_application_error(-20001,'less than minimum salary');
+
+	end if;
+end;
+/
+
+create or replace trigger min_max_sal  
+for insert or update on emp2
+for each row
+declare
+min_sal number;
+max_sal number;
+low_sal number;
+upp_sal number; 
+begin
+	select min(salary), max(salary) into min_sal,max_sal from emp2;
+	low_sal := (max_sal)/ 10;
+	upp_sal := (min_sal)*10;
+	if :new.salary < low_sal and :new.salary > upp_sal then
+		raise_application_error(-20001,'less than minimum salary');
+
+	end if;
+end;
+/
 
